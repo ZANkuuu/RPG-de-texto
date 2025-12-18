@@ -6,15 +6,95 @@ import static Entidades.Player.Armas.*;
 import static Entidades.Player.Armaduras.*;
 
 public class Jogo {
-    Scanner in = new Scanner(System.in);
     Jogador jogador = new Jogador();
 
-     void fluxoDoJogo(){
-        criacaoDePersonagem();
+     void fluxoDeJogo(){
+        Scanner in = new Scanner(System.in);
 
-        boolean opcao = true;
+        criacaoDePersonagem(in);
 
-        while(opcao) {
+        if(selecao(in)){
+            combate();
+        }
+
+    }
+
+    void criacaoDePersonagem(Scanner in){
+        boolean campoVazio = true;
+
+        //Escolha do nome do personagem
+        while(campoVazio){
+
+            try{
+                IO.print("Digite o nome do personagem: ");
+                jogador.setNome(in.nextLine());
+                campoVazio = false;
+            }catch(Exception e){
+                IO.println(e.getMessage());
+            }
+        }
+
+        campoVazio = true;
+        IO.println("===========================");
+
+        //Escolha da arma
+        while(campoVazio){
+            IO.print("""
+                     1 - Espada (5 de dano | 1 ataque por turno)
+                     2 - Machado (12 de dano | 1 ataque a cada 2 turnos)
+                     """);
+            IO.print("Escolha sua arma: ");
+            byte opcaoArma = in.nextByte();
+            in.nextLine();
+
+            switch(opcaoArma){
+                case 1:
+                    jogador.setArma(Espada);
+                    campoVazio = false;
+                    break;
+                case 2:
+                    jogador.setArma(Machado);
+                    campoVazio = false;
+                    break;
+                default:
+                    IO.println("Escolha uma arma!");
+            }
+        }
+
+        campoVazio = true;
+        IO.println("===========================");
+
+        //Escolha da armadura
+        while(campoVazio){
+            IO.print("""
+                     1 - Leve (5 de defesa)
+                     2 - Pesada (10 de defesa)
+                     """);
+            IO.print("Escolha sua armadura: ");
+            byte opcaoArmadura = in.nextByte();
+            in.nextLine();
+
+            switch(opcaoArmadura){
+                case 1:
+                    jogador.setArmadura(Leve);
+                    campoVazio = false;
+                    break;
+                case 2:
+                    jogador.setArmadura(Pesada);
+                    campoVazio = false;
+                    break;
+                default:
+                    IO.println("Escolha uma armadura!");
+            }
+        }
+
+        IO.println("===========================");
+        IO.print("Aperte ENTER para continuar");
+        in.nextLine();
+    }
+
+    boolean selecao(Scanner in){
+        while(true) {
             IO.print("""
                     ======================
                     [1] - Lutar
@@ -27,90 +107,18 @@ public class Jogo {
 
             switch(escolha){
                 case 1:
-                    combate();
-                    break;
+                    IO.println("Adentrando combate");
+                    return true;
                 case 2:
                     IO.print(jogador);
                     break;
                 case 3:
-
-                    break;
+                    IO.println("O jogador desistiu da partida");
+                    return false;
                 default:
                     IO.println("Escolha uma opção válida!");
             }
         }
-    }
-
-    void criacaoDePersonagem(){
-        boolean vazio = true;
-
-        //Escolha do nome do personagem
-        while(vazio){
-
-            try{
-                IO.print("Digite o nome do personagem: ");
-                jogador.setNome(in.nextLine());
-                vazio = false;
-            }catch(Exception e){
-                IO.println(e.getMessage());
-            }
-        }
-
-        vazio = true;
-        IO.println("===========================");
-
-        //Escolha da arma
-        while(vazio){
-            IO.print("""
-                     1 - Espada (5 de dano | 1 ataque por turno)
-                     2 - Machado (12 de dano | 1 ataque a cada 2 turnos)
-                     """);
-            IO.print("Escolha sua arma: ");
-            byte opcaoArma = in.nextByte();
-
-            switch(opcaoArma){
-                case 1:
-                    jogador.setArma(Espada);
-                    vazio = false;
-                    break;
-                case 2:
-                    jogador.setArma(Machado);
-                    vazio = false;
-                    break;
-                default:
-                    IO.println("Escolha uma arma!");
-            }
-        }
-
-        vazio = true;
-        IO.println("===========================");
-
-        //Escolha da armadura
-        while(vazio){
-            IO.print("""
-                     1 - Leve (5 de defesa)
-                     2 - Pesada (10 de defesa)
-                     """);
-            IO.print("Escolha sua armadura: ");
-            byte opcaoArmadura = in.nextByte();
-
-            switch(opcaoArmadura){
-                case 1:
-                    jogador.setArmadura(Leve);
-                    vazio = false;
-                    break;
-                case 2:
-                    jogador.setArmadura(Pesada);
-                    vazio = false;
-                    break;
-                default:
-                    IO.println("Escolha uma armadura!");
-            }
-        }
-
-        IO.println("===========================");
-        IO.print("Aperte ENTER para continuar");
-        in.nextLine();
     }
 
     void combate(){

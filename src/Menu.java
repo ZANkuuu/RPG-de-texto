@@ -21,7 +21,7 @@ public class Menu {
 
         switch(opcaoMenu){
             case 1:
-                jogo.fluxoDoJogo();
+                jogo.fluxoDeJogo();
                 break;
             case 2:
                 IO.println("Saindo...");
