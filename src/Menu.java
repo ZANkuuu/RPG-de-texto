@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
-public class Main{
+public class Menu {
 
     static void main() {
         Scanner in = new Scanner(System.in);
+        Jogo jogo = new Jogo();
 
         IO.print("""
                   ===========================
@@ -20,7 +21,7 @@ public class Main{
 
         switch(opcaoMenu){
             case 1:
-                Jogo.fazerPersonagem();
+                jogo.fluxoDoJogo();
                 break;
             case 2:
                 IO.println("Saindo...");

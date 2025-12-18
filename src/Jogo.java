@@ -6,11 +6,43 @@ import static Entidades.Player.Armas.*;
 import static Entidades.Player.Armaduras.*;
 
 public class Jogo {
-    static Scanner in = new Scanner(System.in);
+    Scanner in = new Scanner(System.in);
+    Jogador jogador = new Jogador();
 
-    static void fazerPersonagem(){
+     void fluxoDoJogo(){
+        criacaoDePersonagem();
+
+        boolean opcao = true;
+
+        while(opcao) {
+            IO.print("""
+                    ======================
+                    [1] - Lutar
+                    [2] - Ver personagem
+                    [3] - Desistir
+                    ======================
+                    """);
+            IO.print("Escolha uma opção: ");
+            byte escolha = in.nextByte();
+
+            switch(escolha){
+                case 1:
+                    combate();
+                    break;
+                case 2:
+                    IO.print(jogador);
+                    break;
+                case 3:
+
+                    break;
+                default:
+                    IO.println("Escolha uma opção válida!");
+            }
+        }
+    }
+
+    void criacaoDePersonagem(){
         boolean vazio = true;
-        Jogador jogador = new Jogador();
 
         //Escolha do nome do personagem
         while(vazio){
@@ -77,6 +109,12 @@ public class Jogo {
         }
 
         IO.println("===========================");
-        IO.print(jogador);
+        IO.print("Aperte ENTER para continuar");
+        in.nextLine();
     }
+
+    void combate(){
+
+    }
+
 }
