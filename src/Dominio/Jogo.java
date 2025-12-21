@@ -10,7 +10,7 @@ import static Entidades.Player.Armaduras.*;
 public class Jogo {
     Jogador jogador = new Jogador();
 
-     void fluxoDeJogo(){
+     public void fluxoDeJogo(){
         Scanner in = new Scanner(System.in);
 
         criacaoDePersonagem(in);
