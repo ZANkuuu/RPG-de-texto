@@ -3,16 +3,18 @@ package Entidades.Inimigos;
 public abstract class Inimigo {
     private byte level;
     private int hp;
+    private int defesaInimigo;
 
     public Inimigo(){
         this.level = 1;
         this.hp = 10;
+        this.defesaInimigo = 3;
     }
 
-    abstract void atacar();
+    abstract void ataqueInimigo();
 
-    void tomarDano(){
-
+    void tomarDanoInimigo(int hp, int dano){
+        this.hp = hp - dano;
     }
 
 }

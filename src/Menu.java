@@ -1,3 +1,5 @@
+import Dominio.Jogo;
+
 import java.util.Scanner;
 
 public class Menu {

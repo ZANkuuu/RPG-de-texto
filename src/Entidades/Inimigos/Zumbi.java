@@ -3,7 +3,7 @@ package Entidades.Inimigos;
 public class Zumbi extends Inimigo{
 
     @Override
-    void atacar() {
+    void ataqueInimigo() {
         IO.println("Zumbi usou sua mordida");
 
     }

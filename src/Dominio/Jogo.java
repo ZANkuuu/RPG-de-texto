@@ -1,3 +1,5 @@
+package Dominio;
+
 import Entidades.Player.Jogador;
 
 import java.util.Scanner;
@@ -17,6 +19,10 @@ public class Jogo {
             combate();
         }
 
+    }
+
+    void salvarPersonagem(Jogador jogador){
+         Save.player.add(jogador);
     }
 
     void criacaoDePersonagem(Scanner in){
@@ -87,6 +93,10 @@ public class Jogo {
                     IO.println("Escolha uma armadura!");
             }
         }
+
+        jogador.setDefesaJogador(jogador.getArmadura());
+
+        salvarPersonagem(jogador);
 
         IO.println("===========================");
         IO.print("Aperte ENTER para continuar");

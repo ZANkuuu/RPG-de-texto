@@ -3,13 +3,37 @@ package Entidades.Player;
 public class Jogador {
     private String nome;
     private byte level;
-    private int hp;
+    private int hpJogador;
+    private int defesaJogador;
     private Armas arma;
     private Armaduras armadura;
 
     public Jogador(){
-        this.hp = 20;
+        this.hpJogador = 20;
         this.level = 1;
+    }
+
+    void ataqueJogador(){
+
+    }
+
+    void tomarDanoJogador(int hp, int dano){
+        this.hpJogador = hp - dano;
+    }
+
+    public int getDefesaJogador() {
+        return defesaJogador;
+    }
+
+    public void setDefesaJogador(Armaduras tipoArmadura) {
+        switch(tipoArmadura){
+            case Armaduras.Leve:
+                this.defesaJogador = 5;
+                break;
+            case Armaduras.Pesada:
+                this.defesaJogador = 10;
+                break;
+        }
     }
 
     public String getNome() {
@@ -32,12 +56,12 @@ public class Jogador {
         this.level = level;
     }
 
-    public int getHp() {
-        return hp;
+    public int getHpJogador() {
+        return hpJogador;
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setHpJogador(int hpJogador) {
+        this.hpJogador = hpJogador;
     }
 
     public Armas getArma() {
@@ -60,8 +84,8 @@ public class Jogador {
     public String toString(){
         return "Nome do jogador: " + getNome() + ".\n" +
                "Nível: " + getLevel() + ".\n" +
-               "Hp: " + getHp() + ".\n" +
+               "Hp: " + getHpJogador() + ".\n" +
                "Arma: " + getArma() + ".\n" +
-               "Armadura: " + getArmadura() + ".\n";
+               "Armadura: " + getArmadura() + " (" + getDefesaJogador() + " Defense).\n";
     }
 }
