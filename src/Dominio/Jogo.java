@@ -1,109 +1,34 @@
 package Dominio;
 
+import Entidades.Inimigos.Zumbi;
 import Entidades.Player.Jogador;
+import GUI.CriacaoDePersonagem;
 
 import java.util.Scanner;
 
-import static Entidades.Player.Armas.*;
-import static Entidades.Player.Armaduras.*;
-
 public class Jogo {
-    Jogador jogador = new Jogador();
+    private final Jogador jogador;
+    private final SaveService saveService;
+    private final Scanner in;
+    private final CriacaoDePersonagem criacaoDePersonagem;
 
-     public void fluxoDeJogo(){
-        Scanner in = new Scanner(System.in);
+    public Jogo(Jogador jogador, SaveService saveService, Scanner in, CriacaoDePersonagem criacaoDePersonagem){
+        this.jogador = jogador;
+        this.saveService = saveService;
+        this.in = in;
+        this.criacaoDePersonagem = criacaoDePersonagem;
+    }
 
-        criacaoDePersonagem(in);
+    public void fluxoDeJogo(){
+        criacaoDePersonagem.criarPersonagem(in, jogador, saveService);
 
-        if(selecao(in)){
+        if(selecao()){
             combate();
         }
 
     }
 
-    void salvarPersonagem(Jogador jogador){
-         Save.player.add(jogador);
-    }
-
-    void criacaoDePersonagem(Scanner in){
-        boolean campoVazio = true;
-
-        //Escolha do nome do personagem
-        while(campoVazio){
-
-            try{
-                IO.print("Digite o nome do personagem: ");
-                jogador.setNome(in.nextLine());
-                campoVazio = false;
-            }catch(Exception e){
-                IO.println(e.getMessage());
-            }
-        }
-
-        campoVazio = true;
-        IO.println("===========================");
-
-        //Escolha da arma
-        while(campoVazio){
-            IO.print("""
-                     1 - Espada (5 de dano | 1 ataque por turno)
-                     2 - Machado (12 de dano | 1 ataque a cada 2 turnos)
-                     """);
-            IO.print("Escolha sua arma: ");
-            byte opcaoArma = in.nextByte();
-            in.nextLine();
-
-            switch(opcaoArma){
-                case 1:
-                    jogador.setArma(Espada);
-                    campoVazio = false;
-                    break;
-                case 2:
-                    jogador.setArma(Machado);
-                    campoVazio = false;
-                    break;
-                default:
-                    IO.println("Escolha uma arma!");
-            }
-        }
-
-        campoVazio = true;
-        IO.println("===========================");
-
-        //Escolha da armadura
-        while(campoVazio){
-            IO.print("""
-                     1 - Leve (5 de defesa)
-                     2 - Pesada (10 de defesa)
-                     """);
-            IO.print("Escolha sua armadura: ");
-            byte opcaoArmadura = in.nextByte();
-            in.nextLine();
-
-            switch(opcaoArmadura){
-                case 1:
-                    jogador.setArmadura(Leve);
-                    campoVazio = false;
-                    break;
-                case 2:
-                    jogador.setArmadura(Pesada);
-                    campoVazio = false;
-                    break;
-                default:
-                    IO.println("Escolha uma armadura!");
-            }
-        }
-
-        jogador.setDefesaJogador(jogador.getArmadura());
-
-        salvarPersonagem(jogador);
-
-        IO.println("===========================");
-        IO.print("Aperte ENTER para continuar");
-        in.nextLine();
-    }
-
-    boolean selecao(Scanner in){
+    boolean selecao(){
         while(true) {
             IO.print("""
                     ======================
@@ -113,7 +38,7 @@ public class Jogo {
                     ======================
                     """);
             IO.print("Escolha uma opção: ");
-            byte escolha = in.nextByte();
+            byte escolha = Byte.parseByte(in.nextLine());
 
             switch(escolha){
                 case 1:
@@ -132,7 +57,14 @@ public class Jogo {
     }
 
     void combate(){
+        Zumbi zumbi = new Zumbi();
 
+        int hpZumbi = zumbi.getHp();
+        int hpPlayer = jogador.getHp();
+
+        while(hpPlayer > 0 && hpZumbi > 0){
+            
+        }
     }
 
 }

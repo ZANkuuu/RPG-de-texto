@@ -56,7 +56,7 @@ public class Jogador {
         this.level = level;
     }
 
-    public int getHpJogador() {
+    public int getHp() {
         return hpJogador;
     }
 
@@ -84,7 +84,7 @@ public class Jogador {
     public String toString(){
         return "Nome do jogador: " + getNome() + ".\n" +
                "Nível: " + getLevel() + ".\n" +
-               "Hp: " + getHpJogador() + ".\n" +
+               "Hp: " + getHp() + ".\n" +
                "Arma: " + getArma() + ".\n" +
                "Armadura: " + getArmadura() + " (" + getDefesaJogador() + " Defense).\n";
     }

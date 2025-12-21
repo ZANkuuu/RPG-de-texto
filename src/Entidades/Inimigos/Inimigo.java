@@ -17,4 +17,8 @@ public abstract class Inimigo {
         this.hp = hp - dano;
     }
 
+    public int getHp(){
+        return this.hp;
+    }
+
 }

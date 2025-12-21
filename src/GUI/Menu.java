@@ -1,13 +1,19 @@
+package GUI;
+
 import Dominio.Jogo;
 
 import java.util.Scanner;
 
 public class Menu {
+    private final Scanner in;
+    private final Jogo jogo;
 
-    static void main() {
-        Scanner in = new Scanner(System.in);
-        Jogo jogo = new Jogo();
+    public Menu(Scanner in, Jogo jogo){
+        this.in = in;
+        this.jogo = jogo;
+    }
 
+    public void menuPrincipal(){
         IO.print("""
                   ===========================
                               RPG
@@ -17,7 +23,7 @@ public class Menu {
                   ===========================
                   """);
         IO.print("Digite sua opção: ");
-        byte opcaoMenu = in.nextByte();
+        byte opcaoMenu = Byte.parseByte(in.nextLine());
 
         IO.println("===========================");
 
@@ -31,7 +37,5 @@ public class Menu {
             default:
                 IO.println("Erro. Opção inválida!");
         }
-
-        in.close();
     }
 }
