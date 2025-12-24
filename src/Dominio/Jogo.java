@@ -1,7 +1,7 @@
 package Dominio;
 
-import Entidades.Inimigos.Zumbi;
 import Entidades.Player.Jogador;
+import GUI.Combate;
 import GUI.CriacaoDePersonagem;
 
 import java.util.Scanner;
@@ -11,21 +11,14 @@ public class Jogo {
     private final SaveService saveService;
     private final Scanner in;
     private final CriacaoDePersonagem criacaoDePersonagem;
+    private final Combate combate;
 
-    public Jogo(Jogador jogador, SaveService saveService, Scanner in, CriacaoDePersonagem criacaoDePersonagem){
+    public Jogo(Jogador jogador, SaveService saveService, Scanner in, CriacaoDePersonagem criacaoDePersonagem, Combate combate){
         this.jogador = jogador;
         this.saveService = saveService;
         this.in = in;
         this.criacaoDePersonagem = criacaoDePersonagem;
-    }
-
-    public void fluxoDeJogo(){
-        criacaoDePersonagem.criarPersonagem(in, jogador, saveService);
-
-        if(selecao()){
-            combate();
-        }
-
+        this.combate = combate;
     }
 
     boolean selecao(){
@@ -56,15 +49,12 @@ public class Jogo {
         }
     }
 
-    void combate(){
-        Zumbi zumbi = new Zumbi();
+    public void fluxoDeJogo(){
+        criacaoDePersonagem.criarPersonagem(in, jogador, saveService);
 
-        int hpZumbi = zumbi.getHp();
-        int hpPlayer = jogador.getHp();
-
-        while(hpPlayer > 0 && hpZumbi > 0){
-            
+        if(selecao()){
+            combate.combateAtivo(in, jogador);
         }
-    }
 
+    }
 }

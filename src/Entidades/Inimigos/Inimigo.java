@@ -11,14 +11,17 @@ public abstract class Inimigo {
         this.defesaInimigo = 3;
     }
 
-    abstract void ataqueInimigo();
+    abstract int ataqueInimigo(int defesaJogador);
 
-    void tomarDanoInimigo(int hp, int dano){
-        this.hp = hp - dano;
+    public void tomarDanoInimigo(int dano){
+        this.hp -= dano;
     }
 
     public int getHp(){
-        return this.hp;
+        return hp;
     }
 
+    public int getDefesaInimigo(){
+        return defesaInimigo;
+    }
 }

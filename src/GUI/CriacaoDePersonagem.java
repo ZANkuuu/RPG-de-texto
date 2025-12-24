@@ -29,7 +29,7 @@ public class CriacaoDePersonagem {
         //Escolha da arma
         while(campoVazio){
             IO.print("""
-                     1 - Espada (5 de dano | 1 ataque por turno)
+                     1 - Espada (8 de dano | 1 ataque por turno)
                      2 - Machado (12 de dano | 1 ataque a cada 2 turnos)
                      """);
             IO.print("Escolha sua arma: ");
@@ -76,6 +76,7 @@ public class CriacaoDePersonagem {
         }
 
         jogador.setDefesaJogador(jogador.getArmadura());
+        jogador.setDanoJogador(jogador.getArma());
 
         saveService.salvarPersonagem(jogador);
 

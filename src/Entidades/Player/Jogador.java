@@ -5,20 +5,44 @@ public class Jogador {
     private byte level;
     private int hpJogador;
     private int defesaJogador;
+    private int danoJogador;
     private Armas arma;
     private Armaduras armadura;
+
+    private int pocaoCura;
 
     public Jogador(){
         this.hpJogador = 20;
         this.level = 1;
+        this.pocaoCura = 1;
     }
 
-    void ataqueJogador(){
-
+    public void curar(int cura){
+        this.hpJogador += cura;
+        this.pocaoCura -= 1;
     }
 
-    void tomarDanoJogador(int hp, int dano){
-        this.hpJogador = hp - dano;
+    public int ataqueJogador(int defesaInimigo){
+        return (5*danoJogador)/(5+defesaInimigo);
+    }
+
+    public void tomarDanoJogador(int dano){
+        this.hpJogador -= dano;
+    }
+
+    public void setDanoJogador(Armas tipoArma){
+        switch(tipoArma){
+            case Armas.Espada:
+                this.danoJogador = 8;
+                break;
+            case Armas.Machado:
+                this.danoJogador = 12;
+                break;
+        }
+    }
+
+    public int getPocaoCura(){
+        return pocaoCura;
     }
 
     public int getDefesaJogador() {

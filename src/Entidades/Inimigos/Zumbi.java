@@ -1,15 +1,19 @@
 package Entidades.Inimigos;
 
 public class Zumbi extends Inimigo{
+    private int danoZumbi;
 
     @Override
-    void ataqueInimigo() {
-        IO.println("Zumbi usou sua mordida");
-
+    public int ataqueInimigo(int defesaJogador) {
+        return (5*danoZumbi)/(5+defesaJogador);
     }
 
     public Zumbi(){
         super();
+        this.danoZumbi = 10;
     }
 
+    public String toString(){
+        return "Zumbi";
+    }
 }
