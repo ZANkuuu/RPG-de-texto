@@ -1,6 +1,8 @@
 package Entidades.Inimigos;
 
-public abstract class Inimigo {
+import Entidades.Player.Jogador;
+
+public class Inimigo implements AcoesInimigo{
     private byte level;
     private int hp;
     private int defesaInimigo;
@@ -10,8 +12,6 @@ public abstract class Inimigo {
         this.hp = 10;
         this.defesaInimigo = 3;
     }
-
-    abstract int ataqueInimigo(int defesaJogador);
 
     public void tomarDanoInimigo(int dano){
         this.hp -= dano;
@@ -23,5 +23,10 @@ public abstract class Inimigo {
 
     public int getDefesaInimigo(){
         return defesaInimigo;
+    }
+
+    @Override
+    public void ataqueInimigo(Jogador jogador) {
+
     }
 }

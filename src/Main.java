@@ -1,3 +1,4 @@
+import Dominio.EnemyFactory;
 import Dominio.Jogo;
 import Dominio.SaveService;
 import Entidades.Player.Jogador;
@@ -14,7 +15,9 @@ public class Main {
         SaveService saveService = new SaveService();
         Jogador jogador = new Jogador();
         CriacaoDePersonagem criacaoDePersonagem = new CriacaoDePersonagem();
-        Combate combate = new Combate();
+        EnemyFactory enemyFactory = new EnemyFactory();
+
+        Combate combate = new Combate(enemyFactory);
 
         Jogo jogo = new Jogo(jogador, saveService, in, criacaoDePersonagem, combate);
         Menu menu = new Menu(in, jogo);
@@ -24,3 +27,5 @@ public class Main {
         in.close();
     }
 }
+
+//TODO Vitória de ambos | Pós Combate

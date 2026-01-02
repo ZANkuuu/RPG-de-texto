@@ -3,7 +3,7 @@ package Entidades.Player;
 public class Jogador {
     private String nome;
     private byte level;
-    private int hpJogador;
+    private int hp;
     private int defesaJogador;
     private int danoJogador;
     private Armas arma;
@@ -12,13 +12,13 @@ public class Jogador {
     private int pocaoCura;
 
     public Jogador(){
-        this.hpJogador = 20;
+        this.hp = 20;
         this.level = 1;
         this.pocaoCura = 1;
     }
 
     public void curar(int cura){
-        this.hpJogador += cura;
+        this.hp += cura;
         this.pocaoCura -= 1;
     }
 
@@ -27,7 +27,7 @@ public class Jogador {
     }
 
     public void tomarDanoJogador(int dano){
-        this.hpJogador -= dano;
+        this.hp -= dano;
     }
 
     public void setDanoJogador(Armas tipoArma){
@@ -81,11 +81,11 @@ public class Jogador {
     }
 
     public int getHp() {
-        return hpJogador;
+        return hp;
     }
 
-    public void setHpJogador(int hpJogador) {
-        this.hpJogador = hpJogador;
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
     public Armas getArma() {
