@@ -7,18 +7,22 @@ import Entidades.Player.Jogador;
 import java.util.Scanner;
 
 public class Combate {
-    private final Inimigo inimigo;
-    final int CURA = 7;
+    private Inimigo inimigo;
 
-    public Combate(EnemyFactory enemyFactory){
-        this.inimigo = enemyFactory.randomEnemy();
+    final int CURA = 7; // TEMPORARIO
+
+    public Combate(){
     }
 
-    public void combateAtivo(Scanner in, Jogador jogador){
+    public void combateAtivo(Scanner in, Jogador jogador, EnemyFactory enemyFactory){
+
+        this.inimigo = enemyFactory.randomEnemy();
+
         int hpJogadorTemp = jogador.getHp();
         int hpInimigoTemp = inimigo.getHp();
 
         while(jogador.getHp() > 0 && inimigo.getHp() > 0){
+
             System.out.printf("""
                      ====================
                      %s
@@ -28,9 +32,11 @@ public class Combate {
                      HP: %d/%d
                      --------------------
                      [1] - Atacar
-                     [2] - Curar (%d poção(ões))
+                     [2] - Curar (Quantidade de poções: %d)
                      ====================
-                     """, inimigo, inimigo.getHp(), hpInimigoTemp, jogador.getNome(), jogador.getHp(), hpJogadorTemp, jogador.getPocaoCura());
+                     """, inimigo, inimigo.getHp(), hpInimigoTemp, jogador.getNome(), jogador.getHp(),
+                    hpJogadorTemp, jogador.getPocaoCura());
+
             IO.print("Escolha a opção: ");
             byte escolha = Byte.parseByte(in.nextLine());
 
@@ -58,19 +64,18 @@ public class Combate {
                     IO.println("Opção inválida. Jogador perdeu o turno.");
             }
 
-
-
+            inimigo.ataqueInimigo(jogador);
         }
 
-
-
+        decisaoDeVitoria(inimigo.getHp());
     }
 
-    void vitoriaInimigo(){
-
-    }
-
-    void vitoriaJogador(){
-
+    void decisaoDeVitoria(int hpInimigo){
+        IO.println("");
+        if(hpInimigo > 0){
+            IO.println("Jogador derrotado! O "+ inimigo +" foi embora.");
+        }else{
+            IO.println("O jogador venceu!");
+        }
     }
 }

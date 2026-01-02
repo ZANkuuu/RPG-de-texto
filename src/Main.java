@@ -17,9 +17,9 @@ public class Main {
         CriacaoDePersonagem criacaoDePersonagem = new CriacaoDePersonagem();
         EnemyFactory enemyFactory = new EnemyFactory();
 
-        Combate combate = new Combate(enemyFactory);
+        Combate combate = new Combate();
 
-        Jogo jogo = new Jogo(jogador, saveService, in, criacaoDePersonagem, combate);
+        Jogo jogo = new Jogo(jogador, saveService, in, criacaoDePersonagem, combate, enemyFactory);
         Menu menu = new Menu(in, jogo);
 
         menu.menuPrincipal();
@@ -27,5 +27,3 @@ public class Main {
         in.close();
     }
 }
-
-//TODO Vitória de ambos | Pós Combate

@@ -12,13 +12,16 @@ public class Jogo {
     private final Scanner in;
     private final CriacaoDePersonagem criacaoDePersonagem;
     private final Combate combate;
+    private final EnemyFactory enemyFactory;
 
-    public Jogo(Jogador jogador, SaveService saveService, Scanner in, CriacaoDePersonagem criacaoDePersonagem, Combate combate){
+    public Jogo(Jogador jogador, SaveService saveService, Scanner in, CriacaoDePersonagem criacaoDePersonagem,
+                Combate combate, EnemyFactory enemyFactory){
         this.jogador = jogador;
         this.saveService = saveService;
         this.in = in;
         this.criacaoDePersonagem = criacaoDePersonagem;
         this.combate = combate;
+        this.enemyFactory = enemyFactory;
     }
 
     boolean selecao(){
@@ -52,8 +55,30 @@ public class Jogo {
     public void fluxoDeJogo(){
         criacaoDePersonagem.criarPersonagem(in, jogador, saveService);
 
-        if(selecao()){
-            combate.combateAtivo(in, jogador);
+        boolean combateRodando = true;
+
+        while(combateRodando) {
+            if (selecao()) {
+                combate.combateAtivo(in, jogador, enemyFactory);
+            }
+
+            IO.print("""
+                    Deseja continuar?
+                    [1] - Sim.
+                    [2] - Não.
+                    Digite: \s""");
+            byte escolha = Byte.parseByte(in.nextLine());
+
+            switch(escolha){
+                case 1:
+                    break;
+                case 2:
+                    IO.println("Saindo...");
+                    combateRodando = false;
+                    break;
+                default:
+                    IO.println("Opção inválida");
+            }
         }
 
     }
